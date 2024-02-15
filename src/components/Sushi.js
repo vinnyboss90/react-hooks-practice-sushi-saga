@@ -1,23 +1,26 @@
 import React from "react";
 
-function Sushi(props) {
+//because eatSushi will be changing the state in App.js, we'll need to pass it through to SushiContainer
+function Sushi({ sushi, eatSushi}) {
+  const { name, img_url, price } = sushi //alternative to writing out "sushi.name", "sushi.img_url", etc. - destructures sushi
+  
   return (
     <div className="sushi">
-      <div className="plate" onClick={/* Give me a callback! */ null}>
-        {/* Tell me if this sushi has been eaten! */}
-        {false ? null : (
+      <div className="plate" onClick={() => eatSushi(sushi)}>
+        {sushi.eaten ? null : (
           <img
-            src={/* Give me an image source! */ null}
-            alt={/* Give me a name! */ "Sushi"}
+            src={img_url}
+            alt={name}
             width="100%"
           />
         )}
       </div>
       <h4 className="sushi-details">
-        {/* Give me a name! */} - ${/* Give me a price! */}
+        {name} - ${price}
       </h4>
     </div>
   );
 }
+//sushi.eaten property is added and is possible due to db being json. "eaten" property is not immedietly supported by the db
 
 export default Sushi;
